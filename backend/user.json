@@ -1,0 +1,10 @@
+[
+  {
+    "email": "admin@test.com",
+    "passwordHash": "$2b$10$qVnEfZ7ss3auxZrTTiGdeOe18zgdfFpUXZgRvRBsT54nhQDIpBfxK"
+  },
+  {
+    "email": "test@test.com",
+    "passwordHash": "$2b$10$3ihXWD59UFzPsD/gC/RwN.EtOM4qsDcF3GYys8qbmHsQRyh7bFQT2"
+  }
+]
