@@ -31,16 +31,50 @@ export default function KeywordChart({ data }) {
             label: "Keyword Distribution",
             data: values,
             backgroundColor: [
-              "#4299e1", "#48bb78", "#ed8936", "#9f7aea", "#38b2ac",
-              "#f56565", "#ec407a", "#26a69a", "#ffa726", "#66bb6a",
+              "#4299e1",
+              "#48bb78",
+              "#ed8936",
+              "#9f7aea",
+              "#38b2ac",
+              "#f56565",
+              "#ec407a",
+              "#26a69a",
+              "#ffa726",
+              "#66bb6a",
             ],
           },
         ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "left",
+            align: "start",
+            labels: {
+              boxWidth: 20,
+              font: {
+                size: 12,
+              },
+            },
+          },
+        },
+        layout: {
+          padding: {
+            right: 20,
+          },
+        },
       },
     });
 
     return () => chart.destroy();
   }, [data]);
 
-  return <canvas ref={canvasRef} className="chart-canvas" id="timelineKeywordChart" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="chart-canvas"
+      id="timelineKeywordChart"
+    />
+  );
 }

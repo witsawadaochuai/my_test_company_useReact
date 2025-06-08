@@ -9,17 +9,35 @@ export default function TimelineEngagementChart({ data }) {
 
     const monthly = {};
     data.forEach((item) => {
-      const month = new Date(item.publisheddate).toLocaleString("default", { month: "short" });
+      const month = new Date(item.publisheddate).toLocaleString("default", {
+        month: "short",
+      });
       if (!monthly[month]) monthly[month] = { view: 0, like: 0, comment: 0 };
       monthly[month].view += item.engagement_view || 0;
       monthly[month].like += item.engagement_like || 0;
       monthly[month].comment += item.engagement_comment || 0;
     });
 
-    const labels = Object.keys(monthly);
-    const views = labels.map((m) => monthly[m].view);
-    const likes = labels.map((m) => monthly[m].like);
-    const comments = labels.map((m) => monthly[m].comment);
+    const allMonths = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const availableMonths = allMonths.filter((m) => monthly[m]);
+    const labels = availableMonths.slice(-6);
+
+    const views = labels.map((m) => monthly[m]?.view || 0);
+    const likes = labels.map((m) => monthly[m]?.like || 0);
+    const comments = labels.map((m) => monthly[m]?.comment || 0);
 
     const chart = new Chart(canvasRef.current, {
       type: "line",
@@ -54,5 +72,11 @@ export default function TimelineEngagementChart({ data }) {
     return () => chart.destroy();
   }, [data]);
 
-  return <canvas ref={canvasRef} className="chart-canvas" id="timelineEngagementChart" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="chart-canvas"
+      id="timelineEngagementChart"
+    />
+  );
 }
