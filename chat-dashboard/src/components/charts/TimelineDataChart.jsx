@@ -1,37 +1,51 @@
-import React, { useEffect, useRef } from "react";
-import { Chart } from "chart.js/auto";
+import React from "react";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
 export default function TimelineDataChart({ data }) {
-  console.log("TimelineDataChart received:", data);
-  const canvasRef = useRef();
+  if (!data) return <p>Loading chart...</p>;
 
-  useEffect(() => {
-    if (!data) return;
-    const ctx = canvasRef.current;
-    const processed = Array(24).fill(0);
-    data.forEach((item) => {
-      const h = new Date(item.publisheddate).getHours();
-      processed[h]++;
-    });
+  const hourlyCounts = Array(24).fill(0);
+  data.forEach((item) => {
+    const hour = new Date(item.publisheddate).getHours();
+    hourlyCounts[hour]++;
+  });
 
-    const chart = new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: [...Array(24).keys()].map((h) => `${h.toString().padStart(2, "0")}:00`),
-        datasets: [
-          {
-            label: "Messages by Hour",
-            data: processed,
-            backgroundColor: "rgba(66, 153, 225, 0.6)",
-            borderColor: "#4299e1",
-            borderWidth: 1,
-          },
-        ],
+  const hourLabels = [...Array(24).keys()].map(
+    (h) => `${h.toString().padStart(2, "0")}:00`
+  );
+
+  const options = {
+    chart: {
+      type: "column",
+      height: 400,
+      width: 800,
+    },
+    title: { text: "Messages by Hour" },
+    xAxis: {
+      categories: hourLabels,
+      title: { text: "Hour" },
+    },
+    yAxis: {
+      min: 0,
+      title: { text: "Number of Messages" },
+    },
+    series: [
+      {
+        name: "Messages",
+        data: hourlyCounts,
+        color: "#4299e1",
       },
-    });
+    ],
+    tooltip: {
+      pointFormat: "<b>{point.y} messages</b>",
+    },
+    credits: { enabled: false },
+  };
 
-    return () => chart.destroy();
-  }, [data]);
-
-  return <canvas ref={canvasRef} className="chart-canvas" id="timelineDataChart" />;
+  return (
+    <div style={{ width: "100%", height: "400px" }}>
+      <HighchartsReact highcharts={Highcharts} options={options} />
+    </div>
+  );
 }

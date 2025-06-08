@@ -1,3 +1,6 @@
 [
-
+  {
+    "email": "admin@test.com",
+    "passwordHash": "$2b$10$eEmgUBzWcq03AVJC9rvpKetAshJAb/pV9eAEWMiwiXV20jg7A3gx2"
+  }
 ]
