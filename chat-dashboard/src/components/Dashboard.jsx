@@ -41,6 +41,7 @@ export default function Dashboard({ switchPage }) {
     );
   }
 
+
   console.log("Rendering Dashboard with data:", data);
 
 

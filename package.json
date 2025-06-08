@@ -1,10 +1,10 @@
 {
-  "name": "my-fullstack-app",
+  "name": "fullstack-app",
   "version": "1.0.0",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd backend && node server.js",
-    "client": "cd chat-dashboard && npm run dev"
+    "server": "cd backend && npm install && node server.js",
+    "client": "cd chat-dashboard && npm install && npm run dev"
   },
   "devDependencies": {
     "concurrently": "^8.2.0"
