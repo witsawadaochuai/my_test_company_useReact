@@ -6,7 +6,7 @@ const router = express.Router();
 const authenticateToken = require("../middlewares/auth");
 
 router.get("/charts", authenticateToken, (req, res) => {
-  console.log("✅ charts API called");
+  console.log("charts API called");
   const dataPath = path.join(__dirname, "..", "data", "example_data.json");
 
   fs.readFile(dataPath, "utf8", (err, jsonData) => {

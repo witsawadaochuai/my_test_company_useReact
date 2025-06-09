@@ -6,7 +6,7 @@ export default function Login({ switchPage }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    
+
     try {
       const res = await fetch("http://localhost:3000/api/auth/login", {
         method: "POST",
@@ -17,7 +17,6 @@ export default function Login({ switchPage }) {
       const data = await res.json();
 
       if (!res.ok) {
-       
         if (res.status === 401 || res.status === 400) {
           alert("Login Failed! Please check your Email or Password");
         } else {
@@ -26,7 +25,6 @@ export default function Login({ switchPage }) {
         return;
       }
 
-      
       localStorage.setItem("token", data.token);
       switchPage("dashboard");
     } catch (error) {
@@ -43,11 +41,11 @@ export default function Login({ switchPage }) {
         <form onSubmit={handleLogin}>
           <div className="form-group">
             <label>Email</label>
-            <input 
-              type="email" 
-              required 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="form-group">
@@ -59,11 +57,13 @@ export default function Login({ switchPage }) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button 
-                type="button" 
-                className="password-toggle" 
+              <button
+                type="button"
+                className="password-toggle"
                 onClick={() => {
-                  const input = document.querySelector("input[type='password']");
+                  const input = document.querySelector(
+                    "input[type='password']"
+                  );
                   input.type = input.type === "password" ? "text" : "password";
                 }}
               >
@@ -71,10 +71,18 @@ export default function Login({ switchPage }) {
               </button>
             </div>
           </div>
-          <a href="#" className="forgot-password">Forgot Password?</a>
-          <button type="submit" className="sign-in-btn">Sign in</button>
+          <a href="#" className="forgot-password">
+            Forgot Password?
+          </a>
+          <button type="submit" className="sign-in-btn">
+            Sign in
+          </button>
           <p>
-            <a href="#" className="sign-up" onClick={() => switchPage("signup")}>
+            <a
+              href="#"
+              className="sign-up"
+              onClick={() => switchPage("signup")}
+            >
               Sign up
             </a>
           </p>

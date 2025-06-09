@@ -7,7 +7,7 @@ export default function Signup({ switchPage }) {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    
+
     if (password !== confirm) {
       alert("Passwords do not match");
       return;
@@ -23,8 +23,10 @@ export default function Signup({ switchPage }) {
       const data = await res.json();
 
       if (!res.ok) {
-      
-        if (res.status === 409 || (data.message && data.message.includes("exist"))) {
+        if (
+          res.status === 409 ||
+          (data.message && data.message.includes("exist"))
+        ) {
           alert("Signup Failed! This email is already registered");
         } else if (res.status === 400) {
           alert("Signup Failed! Please check your information");
@@ -34,7 +36,6 @@ export default function Signup({ switchPage }) {
         return;
       }
 
-      
       alert("Signup successful! Please login.");
       switchPage("login");
     } catch (error) {
@@ -51,34 +52,40 @@ export default function Signup({ switchPage }) {
         <form onSubmit={handleSignup}>
           <div className="form-group">
             <label>Email</label>
-            <input 
-              type="email" 
-              required 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="form-group">
             <label>Password</label>
-            <input 
-              type="password" 
-              required 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="form-group">
             <label>Confirm Password</label>
-            <input 
-              type="password" 
-              required 
-              value={confirm} 
-              onChange={(e) => setConfirm(e.target.value)} 
+            <input
+              type="password"
+              required
+              value={confirm}
+              onChange={(e) => setConfirm(e.target.value)}
             />
           </div>
-          <button type="submit" className="sign-in-btn">Sign Up</button>
+          <button type="submit" className="sign-in-btn">
+            Sign Up
+          </button>
           <p>
-            <a href="#" className="back-to-login" onClick={() => switchPage("login")}>
+            <a
+              href="#"
+              className="back-to-login"
+              onClick={() => switchPage("login")}
+            >
               Back to login
             </a>
           </p>

@@ -207,7 +207,13 @@ body {
   margin: 0 auto;
 }
 
-/* Stats Grid */
+.dashboard-wrapper {
+  width: 1000px;
+  max-width: 100%;
+  height: 500px;
+  margin: 0 auto;
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -241,7 +247,6 @@ body {
   font-weight: 500;
 }
 
-/* Charts Container */
 .charts-container {
   display: flex;
   flex-direction: column;
@@ -297,13 +302,10 @@ body {
   max-height: 300px;
 }
 
-
-/* Utility Classes */
 .hidden {
   display: none !important;
 }
 
-/* Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -319,7 +321,6 @@ body {
   animation: fadeIn 0.5s ease-out;
 }
 
-/* Responsive Design */
 @media (max-width: 1024px) {
   .dashboard-content {
     padding: 0 15px 15px;
